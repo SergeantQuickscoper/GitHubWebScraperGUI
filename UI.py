@@ -7,9 +7,16 @@ root = tkinter.Tk()
 
 def DisplayScrape():
     username = UsernameEntry.get()
+    soup = scraper.GitHubWebScraper.GetWebPageData(username)
+    nameToPrint, profileImageToPrint, followersToPrint, followingToPrint, contributions = scraper.GitHubWebScraper.ScrapeInformation(soup)
+    NameEntry.delete(0,tkinter.END)
+    FollowersEntry.delete(0, tkinter.END)
+    FollowingEntry.delete(0, tkinter.END)
     ProfilePictureEntry.delete(0, tkinter.END)
-    finalURL = scraper.GitHubWebScraper.GetWebPageData(username)
-    ProfilePictureEntry.insert(0, finalURL)
+    NameEntry.insert(0, nameToPrint)
+    FollowersEntry.insert(0, followersToPrint)
+    FollowingEntry.insert(0, followingToPrint)
+    ProfilePictureEntry.insert(0, profileImageToPrint)
 
 root.title("GitHub Web Scraper")
 UsernameEntry = tkinter.Entry(root)
